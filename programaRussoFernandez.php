@@ -52,13 +52,13 @@
 
     //Proceso:
 
-    $partida = jugarWordix("MELON", strtolower("Aye"));
+    //$partida = jugarWordix("MELON", strtolower("Aye"));
     //print_r($partida);
     //imprimirResultado($partida);
 
 
     /*do {
-        $opcion = menu();
+        $opcion = seleccionarOpcion();
 
     
         switch ($opcion) {

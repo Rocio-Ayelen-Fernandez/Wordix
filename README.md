@@ -3,5 +3,5 @@ Trabajo Practico de Introduccion a la Programacion 2023
 
 
 ## Integrantes
-Fernandez Rocio<br />
+Fernandez Rocio
 Russo Florencia

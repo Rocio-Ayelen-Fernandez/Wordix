@@ -40,21 +40,33 @@
 
     }
     /**
-    *Menu de opciones, lee una opcion ingresada y retorna el valor
+    * Lee una opcion ingresada y retorna el valor
+    * @return INT $opcion
     */
     function seleccionarOpcion(){
         //INT $opcion
-        echo "Menu de opciones\n";
-        echo "1. Cargar coleccion de palabras\n";
-        echo "2. Mostrar coleccion de partidas\n";
-        echo "3. Salir\n";
-        echo "********--********\n";
-        echo "Ingrese una opcion ";
-        $opcion = trim(fgets(STDIN));
+        echo "*************Menu de opciones************\n";
+        echo "1. Jugar Wordix con una palabra elegida\n";
+        echo "2. Jugar Wordix con una palabra aleatoria\n";
+        echo "3. Mostrar una partida\n";
+        echo "4. Mostrar la primer partida ganadora\n";
+        echo "5. Mostrar resumen de jugador\n";
+        echo "6. Mostrar listado de partidas\n";
+        echo "7. Agregar una palabra\n";
+        echo "8. Salir\n";
+        echo "*****************************************\n";
+        echo "\nIngrese una opcion: ";
+        
+        $opcion = solicitarNumeroEntre(1, 8);
+        
         return $opcion;
     }
     /**
-    *  ****COMPLETAR*****
+    * Lee una entrada y verifica si es un numero
+    * y si esta en el rango de numeros dispuestos por los parametros formales
+    * @param INT $min
+    * @param INT $max
+    * @return INT
     */
     function solicitarNumeroEntre($min, $max){
         //int $numero
