@@ -8,6 +8,8 @@
     /**************************************/
 
     /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
+    /* Fernandez Rocio FAI-4123 TUDW rayelen.fernandez@est.fi.uncoma.edu.ar Rocio-Ayelen-Fernandez */
+    /* Russo Florencia FAI-4911 TUDW russoflorencia96@est.fi.uncoma.edu.ar FlorenciaRusso9606 */
     /* ****COMPLETAR***** */
 
 
@@ -39,7 +41,9 @@
     /**************************************/
 
     //Declaración de variables:
-    //ARRAY $coleccionPartidas, $ColPal, $partida, $opcion
+    //ARRAY $coleccionPartidas, $ColPal
+    //STRING $partida
+    //INT $opcion
 
 
 
