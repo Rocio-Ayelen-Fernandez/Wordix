@@ -1,4 +1,7 @@
-# pruebaGitHub
-Este es un repositorio de prueba
+# Wordix
+Trabajo Practico de Introduccion a la Programacion 2023
 
-## Rocio Fernandez
+
+## Integrantes
+### Fernandez Rocio
+### Russo Florencia
