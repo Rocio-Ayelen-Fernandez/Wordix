@@ -1,4 +1,96 @@
 <?php
+    /**
+     * ****COMPLETAR***** documentación de la intefaz
+     */
+    function obtenerPuntajeWordix($intento, $palabra)  /* ****COMPLETAR***** parámetros formales necesarios */{
+        //INT $puntaje
+        switch($intento){
+            case 1:
+                $puntaje = 6 + puntajeLetra($palabra);
+                break;
+            case 2:
+                $puntaje = 5 + puntajeLetra($palabra);
+                break;                
+            case 3:
+                $puntaje = 4 + puntajeLetra($palabra);
+                break;
+            case 4:
+                $puntaje = 3 + puntajeLetra($palabra);
+                break;
+            case 5:
+                $puntaje = 2 + puntajeLetra($palabra);
+                break;
+            case 6:
+                $puntaje = 1 + puntajeLetra($palabra);
+                break;
+        }
+
+        return $puntaje;
+        /* ****COMPLETAR***** cuerpo de la función*/
+        return 0;
+    }
+    /**
+     * Devuelve el puntaje dependiendo el tipo de letra en la palabra
+     * @param STRING $palabra
+     * @return INT
+     */
+    function puntajeLetra($palabra){
+        //INT $largo, $puntaje
+        //STRING $letraActual
+        $largo = strlen($palabra);
+        $puntaje = 0;
+
+        for ($i=0; $i< $largo; $i++){
+            $letraActual = $palabra[$i];
+            echo $letraActual."\n";
+            if($letraActual == "A" ||$letraActual == "E"||$letraActual == "I"||$letraActual == "O"||$letraActual == "U"){
+                $puntaje= $puntaje+1;
+                echo $puntaje." Vocal\n";
+            }elseif($letraActual <= "M"){
+                $puntaje =$puntaje +2;
+                echo $puntaje." Menor a M\n";
+            }else{
+                $puntaje = $puntaje+3;
+                echo $puntaje." Mayor a M\n";
+            }
+        }
+        return $puntaje;
+        
+    }
+
+    /**Una función que dada la colección de partidas y el nombre de un jugador, retorne el resumen del
+     * jugador 
+     * @param ARRAY $colPartidas
+     * @param ARRAY $nombreJugador
+     * @return ARRAY*/
+    function resumenJugador($colPartidas, $nombreJugador){ 
+        // STRING $nombre
+        // INT $partidas, $totalPuntaje, $victorias, $cantIntentos
+        // FLOAT $porcentajeVictorias
+        // ARRAY $adivinadas, $resumenJugador
+        $resumenJugador=[];
+        $nombre = $nombreJugador;
+        $partidas = 0;
+        $totalPuntaje = 0;
+        $victorias= 0;
+        $adivinadas = [];
+        $cantIntentos = 0;
+        for($i=0; $i<count($colPartidas); $i++){
+            if ($colPartidas[$i]["jugador"]== $nombreJugador){
+                $partidas = $colPartidas[$i]["partidas"] +$partidas;
+                $totalPuntaje =  $colPartidas[$i]["puntaje"] +$totalPuntaje;
+                if ($colPartidas[$i]["partidas"]>0){
+                  $victorias= $victorias + 1;
+                }
+                $adivinadas[]= $colPartidas[$i]["intentos"];
+                $cantIntentos = count($colPartidas[$i]["intentos"]);
+                $porcentajeVictorias= ($victorias/$cantIntentos)/100;        
+                $resumenJugador[]= ["nombre" => $nombre, "partidas"=> $partidas, "victorias" => $victorias, "porcentajeVictorias"=>$porcentajeVictorias, "adivinadas"=> $adivinadas];
+            } 
+                 
+        }
+     
+    }
 
     /*         Punto 5        */
     // solicitarNumeroEntre()

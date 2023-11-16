@@ -388,6 +388,8 @@
             $nroIntento++;
         } while ($nroIntento <= CANT_INTENTOS && !$ganoElIntento);
 
+        //Añadir funcion que cargue resumen partida
+
 
         if ($ganoElIntento) {
             $nroIntento--;
