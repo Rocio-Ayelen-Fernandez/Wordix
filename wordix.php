@@ -152,7 +152,8 @@
     }
 
     /**
-    * ****COMPLETAR*****
+     * Da la bienvenida al usuario y llama a la función escribirAmarillo para pintar el nombre del usuario en amarillo
+     * @param STRING $usuario
     */
     function escribirMensajeBienvenida($usuario){
         echo "***************************************************\n";
@@ -163,11 +164,14 @@
     }
 
 
-    /**
-    * ****COMPLETAR*****
+    /** 
+     * Verifica si la palabra ingresada tiene solo caracteres alfabéticos
+     * @param STRING $cadena
+     * @return BOOLEAN
     */
     function esPalabra($cadena){
-        //int $cantCaracteres, $i, boolean $esLetra
+        //INT $cantCaracteres, $i, 
+        //BOOLEAN $esLetra
         $cantCaracteres = strlen($cadena); //Devuelve la cantidad de caracters en la palabra
         $esLetra = true;
         $i = 0;
@@ -179,10 +183,11 @@
     }
 
     /**
-    *  ****COMPLETAR*****
+     *  Solicita al usuario que ingrese una palabra de 5 letras y luego llama a la función esPalabra para comprobar que la palabra solo contenga caracteres alfabéticos
+     * @return STRING
     */
     function leerPalabra5Letras(){
-        //string $palabra
+        //STRING $palabra
         echo "Ingrese una palabra de 5 letras: ";
         $palabra = trim(fgets(STDIN));
         $palabra  = strtoupper($palabra);
@@ -195,12 +200,12 @@
     }
 
 
-    /**
-     * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
-     *@return array
+    /** 
+     * Inicia una estructura de datos Teclado. La estructura es de tipo asociativo cuyas claves son las letras del alfabeto
+     * @return ARRAY
      */
     function iniciarTeclado(){
-        //array $teclado (arreglo asociativo, cuyas claves son las letras del alfabeto)
+        //ARRAY $teclado 
         $teclado = [
             "A" => ESTADO_LETRA_DISPONIBLE, "B" => ESTADO_LETRA_DISPONIBLE, "C" => ESTADO_LETRA_DISPONIBLE, "D" => ESTADO_LETRA_DISPONIBLE, "E" => ESTADO_LETRA_DISPONIBLE,
             "F" => ESTADO_LETRA_DISPONIBLE, "G" => ESTADO_LETRA_DISPONIBLE, "H" => ESTADO_LETRA_DISPONIBLE, "I" => ESTADO_LETRA_DISPONIBLE, "J" => ESTADO_LETRA_DISPONIBLE,
@@ -214,11 +219,11 @@
 
     /**
      * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
-     * @param array $teclado
+     * @param ARRAY $teclado
      */
     function escribirTeclado($teclado){
-        //array $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
-        //string $letra, $estado
+        //ARRAY $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
+        //STRING $letra, $estado
         $ordenTeclado = [
             "salto",
             "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
@@ -368,6 +373,11 @@
      */
     function jugarWordix($palabraWordix, $nombreUsuario){
         /*Inicialización*/
+        // ARRAY $arregloDeIntentosWordix, $teclado 
+        // INT $nroIntento, $indiceIntento
+        // STRING $palabraIntento
+        // COMPLETARRRR
+
         $arregloDeIntentosWordix = [];
         $teclado = iniciarTeclado();
         escribirMensajeBienvenida($nombreUsuario);
