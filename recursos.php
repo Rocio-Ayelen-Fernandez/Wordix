@@ -161,4 +161,24 @@
     }
 
     /**          Punto 9        */
+
+    /**          Punto 10        */
+    /** Solicita al usuario el nombre de un jugador y retorna el nombre en minúsculas, asegurándose que dicho nombre comience con una letra */
+    function solicitarJugador(){
+        // STRING $nombreJugador, $letra
+        echo "Ingrese su nombre:\n";
+        $nombreJugador = trim(fgets(STDIN));
+        $letra = $nombreJugador[0];
+        while(!ctype_alpha($letra)){
+            echo "Error, el nombre del jugador no comienza con una
+            letra. Ingrese de vuelta su nombre: \n";
+            $nombreJugador = trim(fgets(STDIN));
+            $letra = $nombreJugador[0];
+        }
+        $nombreJugador = strtolower($nombreJugador);
+        return $nombreJugador;            
+    }
+    
+$nombre =solicitarJugador(); 
+echo $nombre;
 ?>
