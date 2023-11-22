@@ -26,19 +26,207 @@
     /***** DEFINICION DE FUNCIONES ********/
     /**************************************/
 
+
+
+
     /**
-     * Muestra todas las partidas
+     * Agrega una palabra un arreglo
+     * @param ARRAY $coleccion
+     * @param STRING $palabra
+     * @return ARRAY
+     */
+    function agregarPalabra($coleccion, $palabra){
+
+        $coleccion[] = $palabra;//array_push
+
+        return $coleccion;
+    }
+
+
+    /**
+     * Muestra una partida dependiendo del numero ingresado
+     * @param INT $num
      * @param ARRAY $coleccion
      */
-    function cargarPartidas($coleccion){
-        for($i=0; $i<count($coleccion);$i++){
-            foreach ($coleccion[$i] as $indice => $partida){
-            echo $indice.":".$partida."\n";
-            }
-        echo"\n";
+    function mostrarPartidas($num, $coleccion){
+        
+        echo "*********************** Partida WORDIX N°".($num+1)." ***********************\n";
+        echo "Palabra: ".$coleccion[$num]["palabraWordix"].".\n";
+        echo "Jugador: ".$coleccion[$num]["jugador"].".\n";
+        echo "Puntaje: ".$coleccion[$num]["puntaje"].".\n";
+        echo "Intento:";
+        if (($coleccion[$num]["puntaje"])>0){
+            echo " Adivino la palabra en ".$coleccion[$num]["intentos"]." intentos.\n";
+        }else{
+            echo " El jugador ".$coleccion[$num]["jugador"]." no divino la palabra.\n";
+        } 
+        echo "******************************************************************\n";
+        
+    }
+
+
+    /**
+     * Calcula los puntajes obtenidos en base a la cantidad de intestos y la palabra
+     * @param INT $intento
+     * @param STRING $palabra
+     */
+    function obtenerPuntajeWordix($intento, $palabra)  /* ****COMPLETAR***** parámetros formales necesarios */{
+        //INT $puntaje
+        switch($intento){
+            case 1:
+                $puntaje = 6 + puntajeLetra($palabra);
+                break;
+            case 2:
+                $puntaje = 5 + puntajeLetra($palabra);
+                break;                
+            case 3:
+                $puntaje = 4 + puntajeLetra($palabra);
+                break;
+            case 4:
+                $puntaje = 3 + puntajeLetra($palabra);
+                break;
+            case 5:
+                $puntaje = 2 + puntajeLetra($palabra);
+                break;
+            case 6:
+                $puntaje = 1 + puntajeLetra($palabra);
+                break;
         }
 
+        return $puntaje;
+
     }
+
+
+    /**
+     * Devuelve el puntaje dependiendo el tipo de letra en la palabra
+     * @param STRING $palabra
+     * @return INT
+     */
+    function puntajeLetra($palabra){
+        //INT $largo, $puntaje
+        //STRING $letraActual
+        $largo = strlen($palabra);
+        $puntaje = 0;
+
+        for ($i=0; $i< $largo; $i++){
+            $letraActual = $palabra[$i];
+            echo $letraActual."\n";
+            if($letraActual == "A" ||$letraActual == "E"||$letraActual == "I"||$letraActual == "O"||$letraActual == "U"){
+                $puntaje= $puntaje+1;
+                echo $puntaje." Vocal\n";
+            }elseif($letraActual <= "M"){
+                $puntaje =$puntaje +2;
+                echo $puntaje." Menor a M\n";
+            }else{
+                $puntaje = $puntaje+3;
+                echo $puntaje." Mayor a M\n";
+            }
+        }
+        return $puntaje;
+        
+    }
+
+
+    /**
+     * Devuelve el resumen de un jugador dado su nombre
+     * @param ARRAY $coleccion 
+     * @param STRING $nombre
+     */
+    function mostrarResumen($coleccion, $nombre){
+        //INT $indice
+        
+        $indice = primerPartidaGanada($coleccion, $nombre);
+
+        if ($indice != -1){
+            echo "*************************************************\n";
+            echo "Jugador: ".$coleccion[$indice]["jugador"]."\n";
+            echo "Partidas: ".$coleccion[$indice]["partidas"]."\n";
+            echo "Puntaje Total: ".$coleccion[$indice]["puntaje"]."\n";
+            echo "Victoras: ".$coleccion[$indice]["victorias"]."\n";
+            echo "Porcentaje: ".(($coleccion[$indice]["victorias"])*100)/($coleccion[$indice]["partidas"])." % \n";
+            echo "Adivinadas:\n"
+                .$coleccion[$indice]["intento1"]."\n"
+                .$coleccion[$indice]["intento2"]."\n"
+                .$coleccion[$indice]["intento3"]."\n"
+                .$coleccion[$indice]["intento4"]."\n"
+                .$coleccion[$indice]["intento5"]."\n"
+                .$coleccion[$indice]["intento6"]."\n"
+            ;
+        }else{
+            echo "No hay jugador con ese nombre\n";
+        }
+    }
+
+
+    /**
+     * Dada una coleccion de partidas y el nombre de un jugador 
+     * retorna la primera partida ganada, sino -1
+     * @param ARRAY $coleccion 
+     * @param STRING $nombre
+     * @return INT
+     */
+    function primerPartidaGanada($coleccion, $nombre){
+        //INT $indice, $i
+
+        $nombre = strtolower($nombre);
+        $indice = -1;
+        $i=0;
+
+        while($i < count($coleccion) && $indice == -1){
+            if(($coleccion[$i]["jugador"])==$nombre && ($coleccion[$i]["puntaje"]) > 0 ){
+                $indice = $i;
+            }
+            $i++;
+        }
+
+        return $indice;
+    }
+
+
+    /**
+     * Verifica que la palabra ingresada no haya sido utilizada anteriormente
+     * @param ARRAY $colPalabras
+     * @param ARRAY $colPartidas
+     * @param INT $indice
+     * @return INT
+     */
+    function palabraUtilizada($colPalabras, $colPartidas, $indice){
+        //INT $indice
+        $encontrada= -1;
+        $i=0;
+        $palabra = $colPalabras[$indice];
+        while($i < count($colPartidas)){
+            if(($colPartidas[$i]["palabraWordix"])==$palabra){
+                $encontrada = 1; 
+            }
+            
+            $i++;
+        }
+        return $encontrada;
+    }
+
+
+    /** Solicita al usuario el nombre de un jugador y retorna el nombre en minúsculas, 
+     * asegurándose que dicho nombre comience con una letra 
+     * @return STRING
+     * */
+    function solicitarJugador(){
+        // STRING $nombreJugador, $letra
+        echo "Ingrese su nombre:\n";
+        $nombreJugador = trim(fgets(STDIN));
+        $letra = $nombreJugador[0];
+        while(!ctype_alpha($letra)){
+            echo "Error, el nombre del jugador no comienza con una
+            letra. Ingrese de vuelta su nombre: \n";
+            $nombreJugador = trim(fgets(STDIN));
+            $letra = $nombreJugador[0];
+        }
+        $nombreJugador = strtolower($nombreJugador);
+        return $nombreJugador;            
+    }
+
+    
     /**
     * Lee una opcion ingresada y retorna el valor
     * @return INT $opcion
@@ -356,14 +544,6 @@
         return $ganado;
     }
 
-    /**
-     * ****COMPLETAR***** documentación de la intefaz
-     */
-    function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */{
-
-        /* ****COMPLETAR***** cuerpo de la función*/
-        return 0;
-    }
 
     /**
      * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
@@ -403,7 +583,7 @@
 
         if ($ganoElIntento) {
             $nroIntento--;
-            $puntaje = obtenerPuntajeWordix();
+            $puntaje = obtenerPuntajeWordix($nroIntento, $palabraWordix);
             echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
         } else {
             $nroIntento = 0; //reset intento
