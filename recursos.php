@@ -58,47 +58,6 @@
         
     }
 
-    /**
-     * Una función que dada la colección de partidas y el nombre de un jugador, retorne el resumen del
-     * jugador 
-     * @param ARRAY $colPartidas
-     * @param ARRAY $nombreJugador
-     * @return ARRAY*/
-    function resumenJugador($colPartidas, $nombreJugador){ 
-        // STRING $nombre
-        // INT $partidas, $totalPuntaje, $victorias, $cantIntentos
-        // FLOAT $porcentajeVictorias
-        // ARRAY $adivinadas, $resumenJugador
-        $resumenJugador=[];
-        $nombre = $nombreJugador;
-        $partidas = 0;
-        $totalPuntaje = 0;
-        $victorias= 0;
-        $palabra ="";
-        $adivinadas = [];
-        $cantIntentos = 0;
-        $intento =0;
-        $puntajeIntento = 0;
-        for($i=0; $i<count($colPartidas); $i++){
-            if ($colPartidas[$i]["jugador"]== $nombreJugador){
-                $partidas = $colPartidas[$i]["partidas"] +$partidas;
-                $totalPuntaje =  $colPartidas[$i]["puntaje"] +$totalPuntaje;
-                $intento = $colPartidas[$i]["intentos"];
-                $palabra = $colPartidas[$i]["palabraWordix"];
-                if ($colPartidas[$i]["partidas"]>0){
-                  $victorias= $victorias + 1;
-                }
-                $puntajeIntento= obtenerPuntajeWordix($intento, $palabra);
-                $adivinadas[]= $puntajeIntento;
-                $cantIntentos = count($colPartidas[$i]["intentos"]);
-                $porcentajeVictorias= ($victorias/$cantIntentos)/100;        
-                $resumenJugador[]= ["nombre" => $nombre, "partidas"=> $partidas, "victorias" => $victorias, "porcentajeVictorias"=>$porcentajeVictorias, "adivinadas"=> $adivinadas];
-            } 
-                 
-        }
-     
-    }
-
     /*         Punto 5        */
     // solicitarNumeroEntre()
     //wordix.php

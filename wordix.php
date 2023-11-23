@@ -26,7 +26,138 @@
     /***** DEFINICION DE FUNCIONES ********/
     /**************************************/
 
+    /**
+     * Una función que dada la colección de partidas y el nombre de un jugador, retorne el resumen del
+     * jugador 
+     * @param ARRAY $colPartidas
+     * @param STRING $nombreJugador
+     * @param INT $totalPuntaje
+     * @param INT $intento
+     * @return ARRAY*/
+    function resumenJugador($colPartidas, $nombreJugador, $totalPuntaje, $intento){
+        // INT $indice
+        // ARRAY
 
+        $indice = primerPartidaGanada($colPartidas, $nombreJugador);
+
+        if($indice != -1){ //Si encuentra una partida ya creada
+            
+            $colPartidas[$indice]["partidas"] ++;
+            $colPartidas[$indice]["puntaje"]= $colPartidas[$indice]["puntaje"] + $totalPuntaje;
+            if( ($colPartidas[$indice]["puntaje"])>0 ){
+                $colPartidas[$indice]["victorias"] ++;
+            }
+            switch($intento){
+                case 1: 
+                    $colPartidas[$indice]["intento1"] ++;
+                    break;
+                case 2: 
+                    $colPartidas[$indice]["intento2"] ++;
+                    break;
+                case 3: 
+                    $colPartidas[$indice]["intento3"] ++;
+                    break;
+                case 4: 
+                    $colPartidas[$indice]["intento4"] ++;
+                    break;
+                case 5: 
+                    $colPartidas[$indice]["intento5"] ++;
+                    break;
+                case 6: 
+                    $colPartidas[$indice]["intento6"] ++;
+                    break;
+            }
+
+        }else{ //Si no hay partida creada (Va a crear una basada en los parametros de entrada)
+            $indice = count($colPartidas);
+            $colPartidas[$indice]["jugador"] = $nombreJugador;
+            $colPartidas[$indice]["partidas"] = 1;
+            $colPartidas[$indice]["puntaje"] = $totalPuntaje;
+            if( ($colPartidas[$indice]["puntaje"])>0 ){
+                $colPartidas[$indice]["victorias"] = 1;
+            }else{
+                $colPartidas[$indice]["victorias"] = 0;
+            }
+            $colPartidas[$indice]["intento1"]=0;
+            $colPartidas[$indice]["intento2"]=0;
+            $colPartidas[$indice]["intento3"]=0;
+            $colPartidas[$indice]["intento4"]=0;
+            $colPartidas[$indice]["intento5"]=0;
+            $colPartidas[$indice]["intento6"]=0;
+            
+            switch($intento){
+                case 1: 
+                    $colPartidas[$indice]["intento1"] ++;
+                    break;
+                case 2: 
+                    $colPartidas[$indice]["intento2"] ++;
+                    break;
+                case 3: 
+                    $colPartidas[$indice]["intento3"] ++;
+                    break;
+                case 4: 
+                    $colPartidas[$indice]["intento4"] ++;
+                    break;
+                case 5: 
+                    $colPartidas[$indice]["intento5"] ++;
+                    break;
+                case 6: 
+                    $colPartidas[$indice]["intento6"] ++;
+                    break;
+            }
+
+        }
+        return $colPartidas;
+    }
+
+
+
+
+
+    function existePalabraColeccion($coleccion, $palabra){
+        //INT $i
+        $encontrado = -1;
+        $i=0;
+
+        while($i<count($coleccion) && $encontrado == -1 ){
+            if(($coleccion[$i])==$palabra){
+                $encontrado = 1;
+            }
+            $i++;
+        }
+        return $encontrado;
+    }
+
+
+    /**
+     * Funcion que ordena alfabeticamente los nombres de los jugadores y las palabras de las partidas de cada uno de ellos
+     * @param ARRAY $a
+     * @param ARRAY $b
+     * @return ARRAY
+     */
+    function compararJugador($a, $b){
+        if ($a["jugador"] == $b["jugador"]){
+            if ($a["palabraWordix"] == $b["palabraWordix"]){
+                $orden = 0;
+            }elseif($a["palabraWordix"] < $b["palabraWordix"]){
+                $orden = -1;
+            }else{
+            $orden = 1;};
+
+        }elseif($a["jugador"] < $b["jugador"]){
+            $orden = -1;
+        }else{
+        $orden = 1;}
+        return $orden;
+    }
+    /**
+     * Funcion que muestra las partidas ordenadas
+     * @param ARRAY $coleccion
+     */
+    function mostrarPartidasOrdenadas($coleccion){
+        uasort($coleccion, 'compararJugador');
+        print_r($coleccion);
+    }
 
 
     /**
@@ -37,8 +168,7 @@
      */
     function agregarPalabra($coleccion, $palabra){
 
-        $coleccion[] = $palabra;//array_push
-
+        $coleccion[count($coleccion)] = $palabra;
         return $coleccion;
     }
 
@@ -111,16 +241,12 @@
 
         for ($i=0; $i< $largo; $i++){
             $letraActual = $palabra[$i];
-            echo $letraActual."\n";
             if($letraActual == "A" ||$letraActual == "E"||$letraActual == "I"||$letraActual == "O"||$letraActual == "U"){
                 $puntaje= $puntaje+1;
-                echo $puntaje." Vocal\n";
             }elseif($letraActual <= "M"){
                 $puntaje =$puntaje +2;
-                echo $puntaje." Menor a M\n";
             }else{
                 $puntaje = $puntaje+3;
-                echo $puntaje." Mayor a M\n";
             }
         }
         return $puntaje;
@@ -144,14 +270,14 @@
             echo "Partidas: ".$coleccion[$indice]["partidas"]."\n";
             echo "Puntaje Total: ".$coleccion[$indice]["puntaje"]."\n";
             echo "Victoras: ".$coleccion[$indice]["victorias"]."\n";
-            echo "Porcentaje: ".(($coleccion[$indice]["victorias"])*100)/($coleccion[$indice]["partidas"])." % \n";
+            echo "Porcentaje victorias: ".(($coleccion[$indice]["victorias"])*100)/($coleccion[$indice]["partidas"])." % \n";
             echo "Adivinadas:\n"
-                .$coleccion[$indice]["intento1"]."\n"
-                .$coleccion[$indice]["intento2"]."\n"
-                .$coleccion[$indice]["intento3"]."\n"
-                .$coleccion[$indice]["intento4"]."\n"
-                .$coleccion[$indice]["intento5"]."\n"
-                .$coleccion[$indice]["intento6"]."\n"
+                ."Intento 1: ".$coleccion[$indice]["intento1"]."\n"
+                ."Intento 2: ".$coleccion[$indice]["intento2"]."\n"
+                ."Intento 3: ".$coleccion[$indice]["intento3"]."\n"
+                ."Intento 4: ".$coleccion[$indice]["intento4"]."\n"
+                ."Intento 5: ".$coleccion[$indice]["intento5"]."\n"
+                ."Intento 6: ".$coleccion[$indice]["intento6"]."\n"
             ;
         }else{
             echo "No hay jugador con ese nombre\n";
@@ -172,7 +298,6 @@
         $nombre = strtolower($nombre);
         $indice = -1;
         $i=0;
-
         while($i < count($coleccion) && $indice == -1){
             if(($coleccion[$i]["jugador"])==$nombre && ($coleccion[$i]["puntaje"]) > 0 ){
                 $indice = $i;
@@ -189,11 +314,11 @@
      * @param ARRAY $colPalabras
      * @param ARRAY $colPartidas
      * @param INT $indice
-     * @return BOOL
+     * @return INT
      */
     function palabraUtilizada($colPalabras, $colPartidas, $indice){
         //INT $i
-        //BOOL $encontrada
+        //INT $encontrada
         $encontrada= -1;
         $i=0;
         $palabra = $colPalabras[$indice];
@@ -234,7 +359,7 @@
     */
     function seleccionarOpcion(){
         //INT $opcion
-        echo "*************Menu de opciones************\n";
+        echo "\n*************Menu de opciones************\n";
         echo "1. Jugar Wordix con una palabra elegida\n";
         echo "2. Jugar Wordix con una palabra aleatoria\n";
         echo "3. Mostrar una partida\n";

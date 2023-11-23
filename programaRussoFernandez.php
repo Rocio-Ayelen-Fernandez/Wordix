@@ -14,7 +14,7 @@
 
 
 
-    $coleccionPartidas=[];
+    
 
 
     /**************************************/
@@ -50,49 +50,37 @@
     function cargarPartidas($colPartidas){
         //
         // Partida 0
-        $partida0 = ["palabraWordix "=> "QUESO" , "jugador" => "Majo", "intentos"=> 0, "puntaje" => 0];
+        $colPartidas[0]=["palabraWordix"=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
         
         // Partida 1
-        $partida1 = ["palabraWordix "=> "CASAS" , "jugador" => "Flor", "intentos"=> 3, "puntaje" => 14];
+        $colPartidas[1]= ["palabraWordix"=> "CASAS" , "jugador" => "flor", "intentos"=> 3, "puntaje" => 14];
 
         // Partida 2
-        $partida2 = ["palabraWordix "=> "QUESO" , "jugador" => "Matias", "intentos"=> 6, "puntaje" => 10];
+        $colPartidas[2] = ["palabraWordix"=> "QUESO" , "jugador" => "matias", "intentos"=> 6, "puntaje" => 10];
 
         // Partida 3
-        $partida3 = ["palabraWordix" => "MUJER", "jugador" => "Flor", "intentos" => 4, "puntaje" => 12];
+        $colPartidas[3] = ["palabraWordix" => "MUJER", "jugador" => "flor", "intentos" => 4, "puntaje" => 12];
 
         // Partida 4
-        $partida4 = ["palabraWordix" => "FUEGO", "jugador" => "Fede", "intentos" => 5, "puntaje" => 15];
+        $colPartidas[4] = ["palabraWordix" => "FUEGO", "jugador" => "fede", "intentos" => 5, "puntaje" => 15];
 
         // Partida 5
-        $partida5= ["palabraWordix" => "GATOS", "jugador" => "Majo", "intentos" => 3, "puntaje" => 14];
+        $colPartidas[5]= ["palabraWordix" => "GATOS", "jugador" => "majo", "intentos" => 3, "puntaje" => 14];
 
         // Partida 6
-        $partida6 = ["palabraWordix" => "RASGO", "jugador" => "Ayelen", "intentos" => 4, "puntaje" => 10];
+        $colPartidas[6] = ["palabraWordix" => "RASGO", "jugador" => "ayelen", "intentos" => 4, "puntaje" => 10];
 
         // Partida 7
-        $partida7 = ["palabraWordix" => "GOTAS", "jugador" => "Rocio", "intentos" => 4, "puntaje" => 12];
+        $colPartidas[7] = ["palabraWordix" => "GOTAS", "jugador" => "rocio", "intentos" => 4, "puntaje" => 12];
 
         // Partida 8
-        $partida8 = ["palabraWordix" => "HUEVO", "jugador" => "Fede", "intentos" => 5, "puntaje" => 15];
+        $colPartidas[8] = ["palabraWordix" => "HUEVO", "jugador" => "fede", "intentos" => 5, "puntaje" => 15];
 
         // Partida 9
-        $partida9 = ["palabraWordix" => "TINTO", "jugador" => "Lolo", "intentos" => 3, "puntaje" => 18];
+        $colPartidas[9] = ["palabraWordix" => "TINTO", "jugador" => "lolo", "intentos" => 3, "puntaje" => 18];
 
         // Partida 10
-        $partida10 = ["palabraWordix" => "NAVES", "jugador" => "Pato", "intentos" => 5, "puntaje" => 16];
-
-        $colPartidas[0]= $partida0;
-        $colPartidas[1]= $partida1;
-        $colPartidas[2]= $partida2;
-        $colPartidas[3]= $partida3;
-        $colPartidas[4]= $partida4;
-        $colPartidas[5]= $partida5;
-        $colPartidas[6]= $partida6;
-        $colPartidas[7]= $partida7;
-        $colPartidas[8]= $partida8;
-        $colPartidas[9]= $partida9;
-        $colPartidas[10]= $partida10;
+        $colPartidas[10] = ["palabraWordix" => "NAVES", "jugador" => "pato", "intentos" => 5, "puntaje" => 16];
 
         return $colPartidas;
 
@@ -114,6 +102,9 @@
 
 
     //Inicialización de variables:
+    $coleccionResumenJugador=[];
+    
+    $coleccionPartidas=[];
     $coleccionPartidas = cargarPartidas($coleccionPartidas);
     $coleccionPalabras = cargarColeccionPalabras();
 
@@ -127,7 +118,7 @@
      * 
      Esta estructura de control de selección múltiple se utiliza cuando se desea tomar decisiones basadas en el valor de una expresión. En lugar de escribir varias declaraciones if anidadas, puedes utilizar switch para hacer el código más limpio y estructurado.
     */
-    $nombre = solicitarJugador();
+    
     do {
         $opcion = seleccionarOpcion(1, 8);
 
@@ -136,7 +127,8 @@
             case 1: // Seleccionaste la opción 1: Jugar al wordix con una palabra elegida
                               
                 echo "\nOpcion elegida: 1. Jugar Wordix con una palabra elegida\n";
-                echo "Ingrese un numero de palabra";
+                $nombre = solicitarJugador();
+                echo "Ingrese un numero de palabra: ";
                 $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
 
@@ -146,13 +138,15 @@
                     $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
                 }
-                $coleccionPartidas[count([$coleccionPartidas])]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
                 
+                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
+
                 break;
             case 2: // Seleccionaste la opción 2: Jugar al wordix con una palabra aleatoria
 
-                
                 echo "\nOpcion elegida: 2. Jugar Wordix con una palabra aleatoria\n";
+                $nombre = solicitarJugador();
                 $indiceArreglo= array_rand($coleccionPalabras, 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
 
@@ -161,7 +155,9 @@
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
                 }
 
-                $coleccionPartidas[count([$coleccionPartidas])]=jugarWordix($coleccionPalabras[$indiceArreglo], $nombre);
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indiceArreglo], $nombre);
+                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
+
                 break;
 
             case 3:  // Seleccionaste la opción 3: Mostrar partida
@@ -193,19 +189,32 @@
                 $nombre = solicitarJugador();
                 $indice = primerPartidaGanada($coleccionPartidas, $nombre);
                 
-                mostrarResumen($resumenJug, $nombre);
+                $coleccionResumenJugador = mostrarResumen($coleccionResumenJugador, $nombre);
                 
                 break;
             case 6: //Seleccionaste la opción 6: Mostrar listado de partdias ordenadas por Jugador y por palabra
-                
-                //cargarPartidas($coleccionPartidas);
+            
+                mostrarPartidasOrdenadas($coleccionPartidas);
 
                 break;
-            case 7:  //Seleccionaste la opción 7: Agregar una palabra de 5 letras a Wordix
-                $colPal= cargarColeccionPalabras();
-                print_r($colPal);
+            case 7:  
+                
+                
+                //Seleccionaste la opción 7: Agregar una palabra de 5 letras a Wordix
+                $palabra= leerPalabra5Letras();
+                $encontrado = existePalabraColeccion($coleccionPalabras, $palabra);
+                while($encontrado==1){
+                    echo "La palabra ya existe en la coleccion \n";
+                    $palabra= leerPalabra5Letras();
+                }
+                $coleccionPalabras = agregarPalabra($coleccionPalabras, $palabra);
+
+                echo "La palabra ".$palabra." fue agregada a la coleccion\n";
                 break;
-            case 8: //Seleccionaste la opción 8:Salir
+
+            case 8: 
+                
+                //Seleccionaste la opción 8: Salir
                 break;
             default:
                 echo "Error";
