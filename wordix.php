@@ -189,10 +189,11 @@
      * @param ARRAY $colPalabras
      * @param ARRAY $colPartidas
      * @param INT $indice
-     * @return INT
+     * @return BOOL
      */
     function palabraUtilizada($colPalabras, $colPartidas, $indice){
-        //INT $indice
+        //INT $i
+        //BOOL $encontrada
         $encontrada= -1;
         $i=0;
         $palabra = $colPalabras[$indice];
@@ -229,7 +230,7 @@
     
     /**
     * Lee una opcion ingresada y retorna el valor
-    * @return INT $opcion
+    * @return INT 
     */
     function seleccionarOpcion(){
         //INT $opcion
@@ -257,7 +258,7 @@
     * @return INT
     */
     function solicitarNumeroEntre($min, $max){
-        //int $numero
+        //INT $numero
 
         $numero = trim(fgets(STDIN));
 
@@ -411,7 +412,10 @@
      */
     function escribirTeclado($teclado){
         //ARRAY $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
-        //STRING $letra, $estado
+        //STRING $letra, 
+
+        
+        /////$estado???????????
         $ordenTeclado = [
             "salto",
             "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
@@ -440,7 +444,8 @@
      */
     function imprimirIntentosWordix($estructuraIntentosWordix){
         $cantIntentosRealizados = count($estructuraIntentosWordix);
-        //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+        //ARRAY $cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+        //INT $i
 
         for ($i = 0; $i < $cantIntentosRealizados; $i++) {
             $estructuraIntento = $estructuraIntentosWordix[$i];
@@ -471,6 +476,10 @@
      * @return array estructura wordix modificada
      */
     function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento){
+        //ARRAY $estructuraPalabraIntento
+        //INT $cantCaractere, $i
+        //STRING $letraIntento, $estado
+        //BOOl $posicion
         $cantCaracteres = strlen($palabraIntento);
         $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
         for ($i = 0; $i < $cantCaracteres; $i++) {
@@ -505,6 +514,7 @@
      */
     function actualizarTeclado($teclado, $estructuraPalabraIntento)
     {
+        //STRING $estado
         foreach ($estructuraPalabraIntento as $letraIntento) {
             $letra = $letraIntento["letra"];
             $estado = $letraIntento["estado"];
@@ -528,6 +538,8 @@
      * @return bool
      */
     function esIntentoGanado($estructuraPalabraIntento){
+        //INT $cantLetras, $i
+        //BOOL $ganado
         $cantLetras = count($estructuraPalabraIntento);
         $i = 0;
 
@@ -553,9 +565,10 @@
      */
     function jugarWordix($palabraWordix, $nombreUsuario){
         /*Inicialización*/
-        // ARRAY $arregloDeIntentosWordix, $teclado 
-        // INT $nroIntento, $indiceIntento
+        // ARRAY $arregloDeIntentosWordix, $teclado, $partida 
+        // INT $nroIntento, $indiceIntento, $puntaje
         // STRING $palabraIntento
+        //BOOL $ganoElIntento
         // COMPLETARRRR
 
         $arregloDeIntentosWordix = [];

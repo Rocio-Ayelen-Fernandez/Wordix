@@ -13,6 +13,10 @@
     /* ****COMPLETAR***** */
 
 
+
+    $coleccionPartidas=[];
+
+
     /**************************************/
     /***** DEFINICION DE FUNCIONES ********/
     /**************************************/
@@ -43,7 +47,7 @@
      * @param ARRAY $colPartidas
      * @return ARRAY
      */
-    function cargarPartidas(){
+    function cargarPartidas($colPartidas){
         //
         // Partida 0
         $partida0 = ["palabraWordix "=> "QUESO" , "jugador" => "Majo", "intentos"=> 0, "puntaje" => 0];
@@ -110,7 +114,7 @@
 
 
     //Inicialización de variables:
-    $coleccionPartidas = cargarPartidas();
+    $coleccionPartidas = cargarPartidas($coleccionPartidas);
     $coleccionPalabras = cargarColeccionPalabras();
 
     //Proceso:
@@ -119,15 +123,18 @@
     //print_r($partida);
     //imprimirResultado($partida);
 
+    /**La estructura switch es utilizada para comparar la misma variable (en este caso sería la variable $opcion) con muchos valores diferentes (las distintas opciones que existen en la función menu), y ejecuta una parte de código dependiendo el valor que coincide con el valor de la expresión. Switch ejecuta sentencia por sentencia hasta el final del bloque o hasta la primera vez que vea una sentencia break. Si no se escribe una sentencia break al final de la lista de sentencias de un caso, PHP seguirá ejecutando las sentencias del caso siguiente.
+     * 
+     Esta estructura de control de selección múltiple se utiliza cuando se desea tomar decisiones basadas en el valor de una expresión. En lugar de escribir varias declaraciones if anidadas, puedes utilizar switch para hacer el código más limpio y estructurado.
+    */
     $nombre = solicitarJugador();
     do {
         $opcion = seleccionarOpcion(1, 8);
 
     
         switch ($opcion) {
-            case 1:
-                //Jugar al wordix con una palabra elegida
-                
+            case 1: // Seleccionaste la opción 1: Jugar al wordix con una palabra elegida
+                              
                 echo "\nOpcion elegida: 1. Jugar Wordix con una palabra elegida\n";
                 echo "Ingrese un numero de palabra";
                 $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
@@ -139,13 +146,12 @@
                     $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
                 }
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
+                $coleccionPartidas[count([$coleccionPartidas])]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
                 
                 break;
-            case 2: 
+            case 2: // Seleccionaste la opción 2: Jugar al wordix con una palabra aleatoria
 
-                //Jugar al wordix con una palabra aleatoria
-
+                
                 echo "\nOpcion elegida: 2. Jugar Wordix con una palabra aleatoria\n";
                 $indiceArreglo= array_rand($coleccionPalabras, 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
@@ -155,22 +161,19 @@
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
                 }
 
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indiceArreglo], $nombre);
+                $coleccionPartidas[count([$coleccionPartidas])]=jugarWordix($coleccionPalabras[$indiceArreglo], $nombre);
                 break;
 
-            case 3:
-                //Mostrar partida
+            case 3:  // Seleccionaste la opción 3: Mostrar partida
 
                 echo "\nOpcion elegida: 3. Mostrar Partida\n";
 
                 echo "Ingrese un numero de partida";
-                $indiceArreglo=solicitarNumeroEntre(0, (count($coleccionPartidas))-1);
+                $indiceArreglo=solicitarNumeroEntre(0, (count([$coleccionPartidas]))-1);
                 mostrarPartidas($indiceArreglo, $coleccionPartidas);
 
                 break;
-            case 4:
-
-                //Mostrar la primer partida ganadora
+            case 4://Seleccionaste la opción 4: Mostrar la primer partida ganadora
 
                 echo "\nOpcion elegida: 4. Mostrar la primera partida ganadora\n";
                 $nombre = solicitarJugador();
@@ -186,27 +189,23 @@
                 }
                 break;
 
-            case 5: 
-                //Mostrar resumen de Jugador
+            case 5: //Seleccionaste la opción 5: Mostrar resumen de Jugador
                 $nombre = solicitarJugador();
                 $indice = primerPartidaGanada($coleccionPartidas, $nombre);
                 
                 mostrarResumen($resumenJug, $nombre);
                 
                 break;
-            case 6: 
-                //Mostrar listado de partdias ordenadas por Jugador y por palabra
-
+            case 6: //Seleccionaste la opción 6: Mostrar listado de partdias ordenadas por Jugador y por palabra
+                
                 //cargarPartidas($coleccionPartidas);
 
                 break;
-            case 7:
-                //Agregar una palabra de 5 letras a Wordix
+            case 7:  //Seleccionaste la opción 7: Agregar una palabra de 5 letras a Wordix
                 $colPal= cargarColeccionPalabras();
                 print_r($colPal);
                 break;
-            case 8:
-                //Salir
+            case 8: //Seleccionaste la opción 8:Salir
                 break;
             default:
                 echo "Error";
