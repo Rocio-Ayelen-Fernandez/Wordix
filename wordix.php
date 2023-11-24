@@ -391,13 +391,13 @@
             $numero  = $numero * 1; //con esta operación convierto el string en número.
         }
         while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-            echo "Debe ingresar un número entre " . ($min+1) . " y " . ($max+1) . ": ";
+            echo "Debe ingresar un número entre " . ($min) . " y " . ($max) . ": ";
             $numero = trim(fgets(STDIN));
             if (is_numeric($numero)) {
                 $numero  = $numero * 1;
             }
         }
-        return ($numero-1);
+        return $numero;
     }
 
     /**
@@ -588,7 +588,8 @@
             }
             echo "\n";
         }
-        //echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
+        $cantIntentosFaltantes = 6 - $cantIntentosRealizados;
+        echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
     }
 
     /**
