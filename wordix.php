@@ -391,13 +391,13 @@
             $numero  = $numero * 1; //con esta operación convierto el string en número.
         }
         while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-            echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+            echo "Debe ingresar un número entre " . ($min+1) . " y " . ($max+1) . ": ";
             $numero = trim(fgets(STDIN));
             if (is_numeric($numero)) {
                 $numero  = $numero * 1;
             }
         }
-        return $numero;
+        return ($numero-1);
     }
 
     /**

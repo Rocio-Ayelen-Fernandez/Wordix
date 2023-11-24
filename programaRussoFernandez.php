@@ -164,8 +164,8 @@
 
                 echo "\nOpcion elegida: 3. Mostrar Partida\n";
 
-                echo "Ingrese un numero de partida";
-                $indiceArreglo=solicitarNumeroEntre(0, (count([$coleccionPartidas]))-1);
+                echo "Ingrese un numero de partida: ";
+                $indiceArreglo = solicitarNumeroEntre(0, (count($coleccionPartidas)-1));
                 mostrarPartidas($indiceArreglo, $coleccionPartidas);
 
                 break;
