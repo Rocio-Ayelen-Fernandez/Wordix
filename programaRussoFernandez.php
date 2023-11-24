@@ -129,7 +129,7 @@
                 echo "\nOpcion elegida: 1. Jugar Wordix con una palabra elegida\n";
                 $nombre = solicitarJugador();
                 echo "Ingrese un numero de palabra: ";
-                $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
+                $numPalabra= (solicitarNumeroEntre(1, (count($coleccionPalabras))) - 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
 
                 while($encontrado==1){
@@ -140,6 +140,7 @@
                 }
                 $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
                 
+                echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$numPalabra]."\n";
                 $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
@@ -162,10 +163,10 @@
 
             case 3:  // Seleccionaste la opción 3: Mostrar partida
 
-                echo "\nOpcion elegida: 3. Mostrar Partida\n";
+                echo "\nOpcion elegida: 3. Mostrar una partida\n";
 
                 echo "Ingrese un numero de partida: ";
-                $indiceArreglo = solicitarNumeroEntre(0, (count($coleccionPartidas)-1));
+                $indiceArreglo = (solicitarNumeroEntre(1, (count($coleccionPartidas))) - 1);
                 mostrarPartidas($indiceArreglo, $coleccionPartidas);
 
                 break;
@@ -185,22 +186,27 @@
                 }
                 break;
 
-            case 5: //Seleccionaste la opción 5: Mostrar resumen de Jugador
+            case 5: 
+                //Seleccionaste la opción 5: Mostrar resumen de Jugador
+
+                echo "\nOpcion elegida: 5. Mostrar resumen de jugador\n";
                 $nombre = solicitarJugador();
                 $indice = primerPartidaGanada($coleccionPartidas, $nombre);
                 
                 $coleccionResumenJugador = mostrarResumen($coleccionResumenJugador, $nombre);
                 
                 break;
-            case 6: //Seleccionaste la opción 6: Mostrar listado de partdias ordenadas por Jugador y por palabra
-            
+            case 6: 
+                //Seleccionaste la opción 6: Mostrar listado de partdias ordenadas por Jugador y por palabra
+                
+                echo "\nOpcion elegida: 6. Mostrar listado de partidas\n";
                 mostrarPartidasOrdenadas($coleccionPartidas);
 
                 break;
             case 7:  
-                
-                
                 //Seleccionaste la opción 7: Agregar una palabra de 5 letras a Wordix
+
+                echo "\nOpcion elegida: 7. Agregar una palabra\n";
                 $palabra= leerPalabra5Letras();
                 $encontrado = existePalabraColeccion($coleccionPalabras, $palabra);
                 while($encontrado==1){
@@ -213,8 +219,10 @@
                 break;
 
             case 8: 
-                
                 //Seleccionaste la opción 8: Salir
+
+                echo "\nOpcion elegida: 8. Salir\n";
+
                 break;
             default:
                 echo "Error";
