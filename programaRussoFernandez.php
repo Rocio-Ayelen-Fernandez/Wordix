@@ -96,9 +96,10 @@
     /**************************************/
 
     //Declaración de variables:
-    //ARRAY $coleccionPartidas, $ColPal
-    //STRING $partida
-    //INT $opcion
+    //ARRAY $coleccionPartidas, $coleccionResumenJugadorm $coleccionPalabras
+    //STRING $partida, $nombre, $palabra
+    //INT $opcion, $indice
+    //BOOLEAN $encontrado
 
 
     //Inicialización de variables:
@@ -129,18 +130,18 @@
                 echo "\nOpcion elegida: 1. Jugar Wordix con una palabra elegida\n";
                 $nombre = solicitarJugador();
                 echo "Ingrese un numero de palabra: ";
-                $numPalabra= (solicitarNumeroEntre(1, (count($coleccionPalabras))) - 1);
-                $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
+                $indice= (solicitarNumeroEntre(1, (count($coleccionPalabras))) - 1);
+                $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
 
                 while($encontrado==true){
                     echo "La palabra ya fue utilizada\n";
                     echo "Ingrese otro numero\n";
-                    $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
-                    $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
+                    $indice= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
+                    $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
                 }
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$numPalabra], $nombre);
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $nombre);
                 
-                echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$numPalabra]."\n";
+                echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$indice]."\n";
                 $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
@@ -148,15 +149,15 @@
 
                 echo "\nOpcion elegida: 2. Jugar Wordix con una palabra aleatoria\n";
                 $nombre = solicitarJugador();
-                $indiceArreglo= array_rand($coleccionPalabras, 1);
-                $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
+                $indice= array_rand($coleccionPalabras, 1);
+                $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
 
                 while($encontrado==true){
-                    $indiceArreglo= array_rand($coleccionPalabras, 1);
-                    $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
+                    $indice= array_rand($coleccionPalabras, 1);
+                    $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
                 }
 
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indiceArreglo], $nombre);
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $nombre);
                 $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
@@ -166,8 +167,8 @@
                 echo "\nOpcion elegida: 3. Mostrar una partida\n";
 
                 echo "Ingrese un numero de partida: ";
-                $indiceArreglo = (solicitarNumeroEntre(1, (count($coleccionPartidas))) - 1);
-                mostrarPartidas($indiceArreglo, $coleccionPartidas);
+                $indice = (solicitarNumeroEntre(1, (count($coleccionPartidas))) - 1);
+                mostrarPartidas($indice, $coleccionPartidas);
 
                 break;
             case 4://Seleccionaste la opción 4: Mostrar la primer partida ganadora
