@@ -97,7 +97,7 @@
 
     //Declaración de variables:
     //ARRAY $coleccionPartidas, $coleccionResumenJugadorm $coleccionPalabras
-    //STRING $partida, $nombre, $palabra
+    //STRING $partida, $texto
     //INT $opcion, $indice
     //BOOLEAN $encontrado
 
@@ -128,7 +128,7 @@
             case 1: // Seleccionaste la opción 1: Jugar al wordix con una palabra elegida
                               
                 echo "\nOpcion elegida: 1. Jugar Wordix con una palabra elegida\n";
-                $nombre = solicitarJugador();
+                $texto = solicitarJugador();
                 echo "Ingrese un numero de palabra: ";
                 $indice= (solicitarNumeroEntre(1, (count($coleccionPalabras))) - 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
@@ -139,16 +139,16 @@
                     $indice= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
                 }
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $nombre);
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $texto);
                 
                 echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$indice]."\n";
-                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
+                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $texto, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
             case 2: // Seleccionaste la opción 2: Jugar al wordix con una palabra aleatoria
 
                 echo "\nOpcion elegida: 2. Jugar Wordix con una palabra aleatoria\n";
-                $nombre = solicitarJugador();
+                $texto = solicitarJugador();
                 $indice= array_rand($coleccionPalabras, 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
 
@@ -157,8 +157,8 @@
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
                 }
 
-                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $nombre);
-                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $nombre, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
+                $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $texto);
+                $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $texto, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
 
@@ -174,8 +174,8 @@
             case 4://Seleccionaste la opción 4: Mostrar la primer partida ganadora
 
                 echo "\nOpcion elegida: 4. Mostrar la primera partida ganadora\n";
-                $nombre = solicitarJugador();
-                $indice = primerPartidaGanada($coleccionPartidas, $nombre);
+                $texto = solicitarJugador();
+                $indice = primerPartidaGanada($coleccionPartidas, $texto);
 
                 if ($indice != -1){
                     echo "Partida WORDIX ".(($indice)+1).": palabra ".$coleccionPartidas[$indice]["palabraWordix"]."\n";
@@ -183,7 +183,7 @@
                     echo "Puntaje: ".$coleccionPartidas[$indice]["puntaje"]." puntos\n";
                     echo "Intento: Adivino la palabra en ".$coleccionPartidas[$indice]["intentos"]." intentos\n";
                 }else{
-                    echo "El jugador ".$nombre." no gano ninguna partida\n";
+                    echo "El jugador ".$texto." no gano ninguna partida\n";
                 }
                 break;
 
@@ -191,10 +191,10 @@
                 //Seleccionaste la opción 5: Mostrar resumen de Jugador
 
                 echo "\nOpcion elegida: 5. Mostrar resumen de jugador\n";
-                $nombre = solicitarJugador();
-                $indice = primerPartidaGanada($coleccionPartidas, $nombre);
+                $texto = solicitarJugador();
+                $indice = primerPartidaGanada($coleccionPartidas, $texto);
                 
-                $coleccionResumenJugador = mostrarResumen($coleccionResumenJugador, $nombre);
+                $coleccionResumenJugador = mostrarResumen($coleccionResumenJugador, $texto);
                 
                 break;
             case 6: 
@@ -208,15 +208,15 @@
                 //Seleccionaste la opción 7: Agregar una palabra de 5 letras a Wordix
 
                 echo "\nOpcion elegida: 7. Agregar una palabra\n";
-                $palabra= leerPalabra5Letras();
-                $encontrado = existePalabraColeccion($coleccionPalabras, $palabra);
+                $texto= leerPalabra5Letras();
+                $encontrado = existePalabraColeccion($coleccionPalabras, $texto);
                 while($encontrado==true){
                     echo "La palabra ya existe en la coleccion \n";
-                    $palabra= leerPalabra5Letras();
+                    $texto= leerPalabra5Letras();
                 }
-                $coleccionPalabras = agregarPalabra($coleccionPalabras, $palabra);
+                $coleccionPalabras = agregarPalabra($coleccionPalabras, $texto);
 
-                echo "La palabra ".$palabra." fue agregada a la coleccion\n";
+                echo "La palabra ".$texto." fue agregada a la coleccion\n";
                 break;
 
             case 8: 
