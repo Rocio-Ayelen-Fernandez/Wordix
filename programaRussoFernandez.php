@@ -132,7 +132,7 @@
                 $numPalabra= (solicitarNumeroEntre(1, (count($coleccionPalabras))) - 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $numPalabra);
 
-                while($encontrado==1){
+                while($encontrado==true){
                     echo "La palabra ya fue utilizada\n";
                     echo "Ingrese otro numero\n";
                     $numPalabra= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
@@ -151,7 +151,7 @@
                 $indiceArreglo= array_rand($coleccionPalabras, 1);
                 $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
 
-                while($encontrado==1){
+                while($encontrado==true){
                     $indiceArreglo= array_rand($coleccionPalabras, 1);
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indiceArreglo);
                 }
@@ -209,7 +209,7 @@
                 echo "\nOpcion elegida: 7. Agregar una palabra\n";
                 $palabra= leerPalabra5Letras();
                 $encontrado = existePalabraColeccion($coleccionPalabras, $palabra);
-                while($encontrado==1){
+                while($encontrado==true){
                     echo "La palabra ya existe en la coleccion \n";
                     $palabra= leerPalabra5Letras();
                 }

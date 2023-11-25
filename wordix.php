@@ -121,18 +121,17 @@
     function existePalabraColeccion($coleccion, $palabra){
         //INT $i
         //BOOLEAN $encontrado
-        $encontrado = -1;
+        $encontrado = false;
         $i=0;
 
-        while($i<count($coleccion) && $encontrado == -1 ){
+        while($i<count($coleccion) && $encontrado == false ){
             if(($coleccion[$i])==$palabra){
-                $encontrado = 1;
+                $encontrado = true;
             }
             $i++;
         }
         return $encontrado;
     }
-    //MODIFICAR A BOOLEAN
 
     /**
      * Funcion que compara los elementos "jugador" y "palabraWordix" alfabeticamente de un arreglo
@@ -324,24 +323,23 @@
      * @param ARRAY $colPalabras
      * @param ARRAY $colPartidas
      * @param INT $indice
-     * @return INT
+     * @return BOOLEAN
      */
     function palabraUtilizada($colPalabras, $colPartidas, $indice){
         //INT $i
-        //INT $encontrada
-        $encontrada= -1;
+        //BOOLEAN $encontrada
+        $encontrada= false;
         $i=0;
         $palabra = $colPalabras[$indice];
-        while($i < count($colPartidas)){
+        while($i < count($colPartidas) && $encontrada==false){
             if(($colPartidas[$i]["palabraWordix"])==$palabra){
-                $encontrada = 1; 
+                $encontrada = true; 
             }
             
             $i++;
         }
         return $encontrada;
     }
-    //MODIFICAR A BOOLEAN
 
 
     /** Solicita al usuario el nombre de un jugador y retorna el nombre en minúsculas, 
