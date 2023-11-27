@@ -96,7 +96,7 @@
     /**************************************/
 
     //Declaración de variables:
-    //ARRAY $coleccionPartidas, $coleccionResumenJugadorm $coleccionPalabras
+    //ARRAY $coleccionPartidas, $coleccionResumenJugador $coleccionPalabras
     //STRING $partida, $texto
     //INT $opcion, $indice
     //BOOLEAN $encontrado
@@ -104,6 +104,8 @@
 
     //Inicialización de variables:
     $coleccionResumenJugador=[];
+    //settype($coleccionResumenJugador, "array");
+    echo count($coleccionResumenJugador)."\n";
     
     $coleccionPartidas=[];
     $coleccionPartidas = cargarPartidas($coleccionPartidas);
@@ -111,10 +113,6 @@
 
     //Proceso:
     
-    //$partida = jugarWordix("MELON", strtolower("Aye"));
-    //print_r($partida);
-    //imprimirResultado($partida);
-
     /**La estructura switch es utilizada para comparar la misma variable (en este caso sería la variable $opcion) con muchos valores diferentes (las distintas opciones que existen en la función menu), y ejecuta una parte de código dependiendo el valor que coincide con el valor de la expresión. Switch ejecuta sentencia por sentencia hasta el final del bloque o hasta la primera vez que vea una sentencia break. Si no se escribe una sentencia break al final de la lista de sentencias de un caso, PHP seguirá ejecutando las sentencias del caso siguiente.
      * 
      Esta estructura de control de selección múltiple se utiliza cuando se desea tomar decisiones basadas en el valor de una expresión. En lugar de escribir varias declaraciones if anidadas, puedes utilizar switch para hacer el código más limpio y estructurado.
@@ -142,8 +140,9 @@
                 $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $texto);
                 
                 echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$indice]."\n";
+                
                 $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $texto, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
-
+                
                 break;
             case 2: // Seleccionaste la opción 2: Jugar al wordix con una palabra aleatoria
 
@@ -194,7 +193,7 @@
                 $texto = solicitarJugador();
                 $indice = primerPartidaGanada($coleccionPartidas, $texto);
                 
-                $coleccionResumenJugador = mostrarResumen($coleccionResumenJugador, $texto);
+                mostrarResumen($coleccionResumenJugador, $texto);
                 
                 break;
             case 6: 
