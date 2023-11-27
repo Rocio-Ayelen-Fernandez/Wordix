@@ -36,10 +36,16 @@
      * @return ARRAY
      */
     function resumenJugador($colPartidas, $nombreJugador, $totalPuntaje, $intento){
-        // INT $indice
-        // ARRAY $colPartidas
+        // INT $indice $i
 
-        $indice = primerPartidaGanada($colPartidas, $nombreJugador);
+        $i=0;
+        $indice=-1;
+        while($i < (count($colPartidas)) && $indice == -1){
+            if(($colPartidas[$i]["jugador"])==$nombreJugador){
+                $indice = $i;
+            }
+            $i++;
+        }
 
         if($indice != -1){ //Si encuentra una partida ya creada
             
@@ -70,7 +76,7 @@
             }
 
         }else{ //Si no hay partida creada (Va a crear una basada en los parametros de entrada)
-            $indice = count($colPartidas);
+            $indice = (count($colPartidas));
             $colPartidas[$indice]["jugador"] = $nombreJugador;
             $colPartidas[$indice]["partidas"] = 1;
             $colPartidas[$indice]["puntaje"] = $totalPuntaje;
@@ -269,9 +275,15 @@
      * @param STRING $nombre
      */
     function mostrarResumen($coleccion, $nombre){
-        //INT $indice
-        
-        $indice = primerPartidaGanada($coleccion, $nombre);
+        //INT $indice $i
+        $i=0;
+        $indice=-1;
+        while($i < (count($coleccion)) && $indice == -1){
+            if(($coleccion[$i]["jugador"])==$nombre){
+                $indice = $i;
+            }
+            $i++;
+        }
 
         if ($indice != -1){
             echo "*************************************************\n";
@@ -576,7 +588,7 @@
      */
     function imprimirIntentosWordix($estructuraIntentosWordix){
         //ARRAY $estructuraIntento
-        //INT $i, $cantIntentosFaltantes, $cantIntentosRealizados
+        //INT $i, $cantIntentosFaltantes, $cantIntentosRealizados $j
         
         $cantIntentosRealizados = count($estructuraIntentosWordix);
         $cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
@@ -744,3 +756,4 @@
 
         return $partida;
     }
+?>
