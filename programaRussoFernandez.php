@@ -125,7 +125,7 @@
                 while($encontrado==true){
                     echo "La palabra ya fue utilizada\n";
                     echo "Ingrese otro numero\n";
-                    $indice= solicitarNumeroEntre(0, (count($coleccionPalabras))-1);
+                    $indice= (solicitarNumeroEntre(1, (count($coleccionPalabras)))  - 1);
                     $encontrado= palabraUtilizada($coleccionPalabras, $coleccionPartidas, $indice);
                 }
                 $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $texto);
@@ -148,6 +148,7 @@
                 }
 
                 $coleccionPartidas[count($coleccionPartidas)]=jugarWordix($coleccionPalabras[$indice], $texto);
+                echo "\nLa palabra de esta partida fue ".$coleccionPalabras[$indice]."\n";
                 $coleccionResumenJugador = resumenJugador($coleccionResumenJugador, $texto, ($coleccionPartidas[(count($coleccionPartidas)-1)]["puntaje"]), ($coleccionPartidas[(count($coleccionPartidas)-1)]["intentos"]) );
 
                 break;
