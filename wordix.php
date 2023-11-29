@@ -9,7 +9,7 @@
     /**************************************/
     /***** DEFINICION DE CONSTANTES *******/
     /**************************************/
-    const CANT_INTENTOS = 6;
+    const CANT_INTENTOS = 6; //La cantidad de intentos que se puede jugar en una partida
 
     /*
     disponible: letra que aún no fue utilizada para adivinar la palabra
