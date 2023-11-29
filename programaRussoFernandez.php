@@ -14,9 +14,6 @@
 
 
 
-    
-
-
     /**************************************/
     /***** DEFINICION DE FUNCIONES ********/
     /**************************************/
@@ -87,10 +84,6 @@
     }
 
 
-    /* ****COMPLETAR***** */
-
-
-
     /**************************************/
     /*********** PROGRAMA PRINCIPAL *******/
     /**************************************/
@@ -102,16 +95,14 @@
     //BOOLEAN $encontrado
 
 
-    //Inicialización de variables:
+    //Inicialización de variables
+
     $coleccionResumenJugador=[];
-    //settype($coleccionResumenJugador, "array");
     echo count($coleccionResumenJugador)."\n";
     
     $coleccionPartidas=[];
     $coleccionPartidas = cargarPartidas($coleccionPartidas);
     $coleccionPalabras = cargarColeccionPalabras();
-
-    //Proceso:
     
     /**La estructura switch es utilizada para comparar la misma variable (en este caso sería la variable $opcion) con muchos valores diferentes (las distintas opciones que existen en la función menu), y ejecuta una parte de código dependiendo el valor que coincide con el valor de la expresión. Switch ejecuta sentencia por sentencia hasta el final del bloque o hasta la primera vez que vea una sentencia break. Si no se escribe una sentencia break al final de la lista de sentencias de un caso, PHP seguirá ejecutando las sentencias del caso siguiente.
      * 
