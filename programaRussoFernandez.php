@@ -405,16 +405,21 @@
                 //Seleccionaste la opción 5: Mostrar resumen de Jugador
 
                 echo "\nOpcion elegida: 5. Mostrar resumen de jugador\n";
-
                 do{ 
+                    $encontrado=false;
                     $texto = solicitarJugador();
-                    if($coleccionPartidas[$i]["jugador"]==$texto){
+                    for($i=0;$i<count($coleccionPartidas); $i++) {
+                        
+                        if(($coleccionPartidas[$i]["jugador"]) == $texto){
+                            $encontrado=true;
+                        }
+                    }
+                    if($encontrado==true){
                         mostrarResumen($coleccionPartidas, $texto);
                     }else{
                         echo "El nombre ingresado no se encuentra en la lista\n";
                     }
-                    $i++;
-                }while($coleccionPartidas[($i-1)]["jugador"]!==$texto);
+                }while($encontrado==false);
             
                 
                 break;
@@ -432,15 +437,15 @@
                 $encontrado = false;
                 $texto= leerPalabra5Letras();
                 do{
-                    
-                    if(($coleccionPalabras[$i])==$texto){
+                    if(in_array($texto, $coleccionPalabras)){
                         $encontrado = true;
                         echo "La palabra ingresada ya se encuentra en la lista\n";
                         $texto= leerPalabra5Letras();
-                    }
-                    $i++;
-                }while($i<count($coleccionPalabras) && $encontrado == true);
-
+                        
+                    }else{
+                        $encontrado = false;
+                    }                                    
+                }while($encontrado == true);
 
                 $coleccionPalabras = agregarPalabra($coleccionPalabras, $texto);
                 echo "La palabra ".$texto." fue agregada a la coleccion\n";
