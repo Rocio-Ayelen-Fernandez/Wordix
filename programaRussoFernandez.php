@@ -10,7 +10,7 @@
     /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
     /* Fernandez Rocio FAI-4123 TUDW rayelen.fernandez@est.fi.uncoma.edu.ar Rocio-Ayelen-Fernandez */
     /* Russo Florencia FAI-4911 TUDW russoflorencia96@est.fi.uncoma.edu.ar FlorenciaRusso9606 */
-    /* ****COMPLETAR***** */
+    
 
 
 
@@ -25,6 +25,7 @@
      * @return ARRAY
      */
     function cargarColeccionPalabras(){
+        //ARRAY $coleccionPalabras
         $coleccionPalabras = [
             "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
             "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
@@ -185,11 +186,10 @@
     /**
      * Devuelve el resumen de un jugador dado su nombre
      * @param ARRAY $coleccion 
+     * @param STRING $nombre
      */
     function mostrarResumen($coleccion, $nombre){
-        //STRING $nombre
         //INT $j, $puntaje, $partidas, $victorias, $i1, $i2, $i3, $i4, $i5, $i6
-        //Variables del mensaje
         $puntaje=0;
         $partidas=0;
         $victorias=0;
@@ -296,6 +296,7 @@
      * @param ARRAY $colPalabras
      * @param ARRAY $colPartidas
      * @param INT $indice
+     * @param STRING $nombre
      * @return BOOLEAN
      */
     function palabraUtilizada($colPalabras, $colPartidas, $indice, $nombre){
