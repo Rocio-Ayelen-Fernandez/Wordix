@@ -30,7 +30,7 @@
      * Calcula los puntajes obtenidos en base a la cantidad de intentos y una palabra
      * @param INT $intento
      * @param STRING $palabra
-     * @param INT $puntaje
+     * @return INT
      */
     function obtenerPuntajeWordix($intento, $palabra){
         //INT $puntaje, $i
